@@ -19,6 +19,11 @@ class Driver extends Model
         'status',
     ];
 
+    public function trips(): BelongsToMany
+    {
+        return $this->belongsToMany(Trip::class, 'driver_trip');
+    }
+
     public function getBirthDate(): string
     {
         return Date::parse($this->birth_date)->format('d/m/Y');
