@@ -1,42 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1><i class="fa-solid fa-id-card"></i> Motoristas</h1>
+    <div class="title_box">
+        <h1 class="content_title"><i class="fa-solid fa-id-card"></i> Motoristas</h1>
+        <a class="link_new" href="{{ route('drivers.create') }}"><i class="fa-solid fa-plus"></i> Novo Motorista</a>
+    </div>
 
     @if(session('success'))
-        <p>{{ session('success') }}</p>
+        <p class="msg_success">{{ session('success') }}</p>
     @endif
 
     @if($drivers->isEmpty())
-        <p>Nenhum motorista cadastrado</p>
+        <p class="is_empty">Nenhum motorista cadastrado</p>
     @else
-        <table>
-            <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Idade</th>
-                <th>CNH</th>
-                <th>Ações</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($drivers as $driver)
-                <tr>
-                    <td><a href="{{ route('drivers.show', $driver) }}">{{ $driver->name }}</a></td>
-                    <td>{{ $driver->getAge() }}</td>
-                    <td>{{ $driver->cnh }}</td>
-                    <td>
-                        <a href="{{ route('drivers.edit', $driver) }}" title="Editar"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <form action="{{ route('drivers.destroy', $driver) }}" method="POST" style="display:inline;">
+        @foreach($drivers as $driver)
+            <div class="list_box">
+                <div>
+                    <h2 class="list_title">{{ $driver->name }}</h2>
+                    <p>Idade:{{ $driver->getAge() }}</p>
+                    <p>CNH: {{ $driver->cnh }}</p>
+                    <p>Status: {{ $driver->status_text }}</p>
+                </div>
+
+                <div class="actions_box">
+                    <div>
+                        <a href="{{ route('drivers.show', $driver) }}" title="Visualizar">
+                            <i class="fa-solid fa-eye"></i> Mais detalhes
+                        </a>
+                    </div>
+
+                    <div>
+                        <a href="{{ route('drivers.edit', $driver) }}">
+                            <i class="fa-solid fa-pen-to-square"></i> Editar
+                        </a>
+                    </div>
+
+                    <div>
+                        <form
+                            action="{{ route('drivers.destroy', $driver->id) }}"
+                            method="POST"
+                            onsubmit="return confirm('Tem certeza que deseja excluir este motorista?');"
+                        >
                             @csrf
                             @method('DELETE')
-                            <button type="submit" title="Deletar"><i class="fa-solid fa-trash"></i></button>
+                            <button type="submit" title="Deletar">
+                                <i class="fa-solid fa-trash"></i> Deletar
+                            </button>
                         </form>
-                        <a href="{{ route('drivers.show', $driver) }}" title="Visualizar"><i class="fa-solid fa-eye"></i></a>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        @endforeach
     @endif
 @endsection

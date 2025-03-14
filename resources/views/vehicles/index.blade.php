@@ -38,7 +38,7 @@
                         <form
                             action="{{ route('vehicles.destroy', $vehicle->id) }}"
                             method="POST"
-                            onsubmit="return confirm('Tem certeza que deseja excluir esta viagem?');"
+                            onsubmit="return confirm('Tem certeza que deseja excluir este veículo?');"
                         >
                             @csrf
                             @method('DELETE')
