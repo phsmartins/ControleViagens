@@ -1,41 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1><i class="fa-solid fa-bus"></i> Veículos</h1>
-    <a href="{{ route('vehicles.create') }}"><i class="fa-solid fa-plus"></i> Novo Veículo</a>
+    <div class="title_box">
+        <h1 class="content_title"><i class="fa-solid fa-bus"></i> Veículos</h1>
+        <a class="link_new" href="{{ route('vehicles.create') }}"><i class="fa-solid fa-plus"></i> Novo Veículo</a>
+    </div>
 
     @if(session('success'))
-        <p>{{ session('success') }}</p>
+        <p class="msg_success">{{ session('success') }}</p>
     @endif
 
     @if($vehicles->isEmpty())
-        <p>Nenhum veículo cadastrado</p>
+        <p class="is_empty">Nenhum veículo cadastrado</p>
     @else
-        <table>
-            <tr>
-                <th>Modelo</th>
-                <th>Ano</th>
-                <th>Placa</th>
-                <th>Ações</th>
-            </tr>
-            @foreach($vehicles as $vehicle)
-                <tr>
-                    <td><a href="{{ route('vehicles.show', $vehicle->id) }}">{{ $vehicle->model }}</a></td>
-                    <td>{{ $vehicle->year }}</td>
-                    <td>{{ $vehicle->license_plate }}</td>
-                    <td>
-                        <a href="{{ route('vehicles.edit', $vehicle->id) }}" title="Editar"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST" style="display: inline;">
+        @foreach($vehicles as $vehicle)
+            <div class="list_box">
+                <div>
+                    <h2 class="list_title">{{ $vehicle->model }} - {{ $vehicle->license_plate }}</h2>
+                    <p>Ano:{{ $vehicle->year }}</p>
+                    <p>Renavam:{{ $vehicle->renavam }}</p>
+                </div>
+
+                <div class="actions_box">
+                    <div>
+                        <a href="{{ route('vehicles.show', $vehicle) }}" title="Visualizar">
+                            <i class="fa-solid fa-eye"></i> Mais detalhes
+                        </a>
+                    </div>
+
+                    <div>
+                        <a href="{{ route('vehicles.edit', $vehicle) }}">
+                            <i class="fa-solid fa-pen-to-square"></i> Editar
+                        </a>
+                    </div>
+
+                    <div>
+                        <form
+                            action="{{ route('vehicles.destroy', $vehicle->id) }}"
+                            method="POST"
+                            onsubmit="return confirm('Tem certeza que deseja excluir esta viagem?');"
+                        >
                             @csrf
                             @method('DELETE')
-                            <button type="submit" title="Deletar"><i class="fa-solid fa-trash"></i></button>
+                            <button type="submit" title="Deletar">
+                                <i class="fa-solid fa-trash"></i> Deletar
+                            </button>
                         </form>
-                        <a href="{{ route('vehicles.show', $vehicle->id) }}" title="Visualizar">
-                            <i class="fa-solid fa-eye"></i>
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
-        </table>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        @endforeach
     @endif
 @endsection

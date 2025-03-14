@@ -111,6 +111,7 @@ a.link_new {
     text-decoration: none;
 
     padding: 1rem 2rem;
+    margin-top: 2rem;
 
     background-color: var(--insert-background-color);
     border-radius: .5rem;
@@ -124,6 +125,26 @@ a.link_back {
 
 a.link_new:hover {
     background-color: var(--insert-hover-background-color);
+}
+
+a.more_details {
+    display: inline-block;
+
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: var(--text-light-color);
+
+    background-color: var(--upgrade-background-color);
+    border-radius: .5rem;
+
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+
+    transition: .4s;
+}
+
+a.more_details:hover {
+    background-color: var(--upgrade-hover-background-color);
 }
 
 div.list_box {
