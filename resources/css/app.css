@@ -1,12 +1,244 @@
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source "../**/*.blade.php";
 @source "../**/*.js";
-@source "../**/*.vue";
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+:root {
+    font-size: 62.5%;
+
+    --primary-dark-color: #030234;
+    --secondary-dark-color: #212121;
+    --tertiary-dark-color: #494949;
+
+    --primary-light-color: #226EB6;
+    --secondary-light-color: #87B3DD;
+
+    --text-light-color: #FFFFFF;
+
+    --color-input-border: #727272;
+
+    --delete-background-color: #EC0707;
+
+    --upgrade-background-color: #226EB6;
+    --upgrade-hover-background-color: #2582DA;
+
+    --insert-background-color: #52B963;
+    --insert-hover-background-color: #45A955;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: "Roboto", sans-serif;
+}
+
+main {
+    display: flex;
+}
+
+aside {
+    position: fixed;
+
+    width: 20rem;
+    height: 100vh;
+
+    background-color: var(--secondary-dark-color);
+}
+
+aside a {
+    display: block;
+
+    font-size: 1.8rem;
+    color: var(--text-light-color);
+    text-decoration: none;
+
+    border-bottom: 1px solid var(--color-input-border);
+
+    padding: 1.5rem;
+
+    transition: .2s;
+}
+
+aside a:hover {
+    background-color: var(--color-input-border);
+}
+
+section.container {
+    width: 100%;
+    padding-left: 20rem;
+}
+
+button {
+    cursor: pointer;
+}
+
+.content {
+    padding: 0 8rem 5rem;
+}
+
+.is_empty {
+    font-size: 2rem;
+    text-align: center;
+
+    margin-top: 6rem;
+}
+
+.title_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content_title {
+    font-size: 2.8rem;
+    color: var(--primary-dark-color);
+
+    margin: 5rem 0 2rem;
+}
+
+a.link_new {
+    font-size: 1.8rem;
+    color: var(--text-light-color);
+    text-decoration: none;
+
+    padding: 1rem 2rem;
+
+    background-color: var(--insert-background-color);
+    border-radius: .5rem;
+
+    transition: .4s;
+}
+
+a.link_back {
+    font-size: 1.6rem;
+}
+
+a.link_new:hover {
+    background-color: var(--insert-hover-background-color);
+}
+
+div.list_box {
+    padding: 3rem 0;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.list_title {
+    font-size: 2rem;
+
+    margin-bottom: 1rem;
+}
+
+.list_box p {
+    font-size: 1.6rem;
+    margin-bottom: .8rem;
+}
+
+.on_trip {
+    color: var(--primary-light-color);
+}
+
+.completed {
+    color: var(--insert-background-color);
+}
+
+.actions_box a {
+    display: block;
+
+    color: var(--primary-dark-color);
+    text-decoration: none;
+    font-size: 1.4rem;
+
+    margin-bottom: 1rem;
+
+    transition: .4s;
+}
+
+.actions_box a:hover {
+    opacity: .7;
+    text-decoration: underline;
+}
+
+.actions_box button {
+    border: none;
+    background: none;
+
+    color: var(--primary-dark-color);
+    text-decoration: none;
+    font-size: 1.4rem;
+
+    margin-bottom: 1rem;
+
+    transition: .4s;
+}
+
+.actions_box button:hover {
+    opacity: .7;
+    text-decoration: underline;
+}
+
+div.show_list p {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.msg_error {
+    font-size: 1.6rem;
+    color: var(--delete-background-color);
+
+    margin-bottom: .5rem;
+}
+
+.msg_success {
+    font-size: 1.8rem;
+    color: var(--insert-background-color);
+
+    margin: 2rem 0;
+}
+
+.input_box label {
+    display: block;
+    margin-bottom: .5rem;
+
+    font-size: 1.6rem;
+}
+
+.input_box select, input {
+    width: 100%;
+
+    margin-bottom: 2rem;
+    padding: 1rem;
+
+    font-size: 1.6rem;
+}
+
+.btn_box {
+    text-align: right;
+}
+
+.btn_submit {
+    padding: 1rem 2rem;
+
+    background-color: var(--insert-background-color);
+    border: 1px solid var(--insert-background-color);
+    border-radius: .5rem;
+
+    color: var(--text-light-color);
+    font-size: 1.6rem;
+
+    transition: .4s;
+}
+
+.btn_submit:hover {
+    background-color: var(--insert-hover-background-color);
 }

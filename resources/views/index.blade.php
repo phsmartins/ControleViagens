@@ -1,27 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Viagens em andamento</h1>
+    <div class="title_box">
+        <h1 class="content_title"><i class="fa-solid fa-list"></i> Viagens em andamento</h1>
+        <a class="link_new" href="{{ route('trips.create') }}"><i class="fa-solid fa-plus"></i> Inicar viagem</a>
+    </div>
 
     @if($trips->isEmpty())
-        <p>Nenhuma viagem em andamento.</p>
+        <p class="is_empty">Nenhuma viagem em andamento</p>
     @else
         @foreach($trips as $trip)
-            <p>{{ $trip->vehicle->model }} - {{ $trip->vehicle->license_plate }}</p>
-            <p>Motoristas: {{ implode(', ', $trip->drivers->pluck('name')->toArray()) }}</p>
-            <p>{{ $trip->date_start_formatted }}</p>
-            <p>{{ $trip->status_text }}</p>
-            <a href="{{ route('trips.show', $trip) }}" title="Visualizar">
-                <i class="fa-solid fa-eye"></i>
-            </a>
-            <form action="{{ route('trips.destroy', $trip->id) }}" method="POST" style="display: inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" title="Deletar">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </form>
-            <a href="{{ route('trips.finish', $trip) }}">Finalizar</a>
+            <div class="list_box">
+                <div>
+                    <h2 class="list_title">{{ $trip->vehicle->model }} - {{ $trip->vehicle->license_plate }}</h2>
+
+                    <p>Motoristas: {{ implode(', ', $trip->drivers->pluck('name')->toArray()) }}</p>
+                    <p>{{ $trip->date_start_formatted }}</p>
+                    <p><i class="fa-solid fa-circle on_trip"></i> {{ $trip->status_text }}</p>
+                </div>
+
+                <div class="actions_box">
+                    <div>
+                        <a href="{{ route('trips.show', $trip) }}" title="Visualizar">
+                            <i class="fa-solid fa-eye"></i> Mais detalhes
+                        </a>
+                    </div>
+
+                    <div>
+                        <a href="{{ route('trips.finish', $trip) }}">
+                            <i class="fa-solid fa-lock"></i> Finalizar
+                        </a>
+                    </div>
+                </div>
+            </div>
             <hr>
         @endforeach
     @endif
