@@ -3,7 +3,7 @@
 @section('content')
     <div class="title_box">
         <h1 class="content_title"><i class="fa-solid fa-list"></i> Viagens em andamento</h1>
-        <a class="link_new" href="{{ route('trips.create') }}"><i class="fa-solid fa-plus"></i> Inicar viagem</a>
+        <a class="link_new" href="{{ route('trips.create') }}"><i class="fa-solid fa-plus"></i> Iniciar viagem</a>
     </div>
 
     @forelse($trips as $trip)
