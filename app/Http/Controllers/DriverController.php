@@ -48,7 +48,19 @@ class DriverController extends Controller
 
     public function show(int $id): View
     {
-        $driver = Driver::findOrFail($id);
+        $driver = Driver::with([
+            'trips' => function ($query) {
+                $query->orderByRaw("
+                    CASE
+                        WHEN status = 'ongoing' THEN 1
+                        WHEN status = 'completed' THEN 2
+                        ELSE 3
+                    END
+                ")->orderBy('date_start', 'desc');
+            },
+            'trips.vehicle'
+        ])->findOrFail($id);
+
         return view('drivers.show', compact('driver'));
     }
 
