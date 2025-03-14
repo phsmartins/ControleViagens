@@ -20,17 +20,15 @@
 
     <h2 class="content_title">Histórico de Viagens</h2>
 
-    @if ($vehicle->trips->isEmpty())
+    @forelse ($vehicle->trips as $trip)
+        <div class="show_list" style="margin-bottom: 3rem">
+            <p><strong>Motoristas:</strong> {{ implode(', ', $trip->drivers->pluck('name')->toArray()) }}</p>
+            <p><strong>Data da viagem:</strong> {{ $trip->date_start_formatted }}</p>
+            <p><strong>Status:</strong> {{ $trip->status_text }}</p>
+            <a class="more_details" href="{{ route('trips.show', $trip) }}" title="Ver Detalhes">Mais detalhes</a>
+            <hr>
+        </div>
+    @empty
         <p class="is_empty">Este veículo ainda não participou de nenhuma viagem</p>
-    @else
-        @foreach ($vehicle->trips as $trip)
-            <div class="show_list" style="margin-bottom: 3rem">
-                <p><strong>Motoristas:</strong> {{ implode(', ', $trip->drivers->pluck('name')->toArray()) }}</p>
-                <p><strong>Data da viagem:</strong> {{ $trip->date_start_formatted }}</p>
-                <p><strong>Status:</strong> {{ $trip->status_text }}</p>
-                <a class="more_details" href="{{ route('trips.show', $trip) }}" title="Ver Detalhes">Mais detalhes</a>
-                <hr>
-            </div>
-        @endforeach
-    @endif
+    @endforelse
 @endsection

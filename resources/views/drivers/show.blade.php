@@ -19,17 +19,15 @@
 
     <h2 class="content_title">Histórico de Viagens</h2>
 
-    @if ($driver->trips->isEmpty())
+    @forelse ($driver->trips as $trip)
+        <div class="show_list" style="margin-bottom: 3rem">
+            <p><strong>Veículo: </strong>{{ $trip->vehicle->model }} - {{ $trip->vehicle->license_plate }}</p>
+            <p><strong>Data da viagem:</strong>  {{ $trip->date_start_formatted }}</p>
+            <p><strong>Status:</strong>  {{ $trip->status_text }}</p>
+            <a class="more_details" href="{{ route('trips.show', $trip) }}" title="Ver Detalhes">Mais detalhes</a>
+            <hr>
+        </div>
+    @empty
         <p class="is_empty">Este motorista ainda não participou de nenhuma viagem</p>
-    @else
-        @foreach ($driver->trips as $trip)
-            <div class="show_list" style="margin-bottom: 3rem">
-                <p><strong>Veículo: </strong>{{ $trip->vehicle->model }} - {{ $trip->vehicle->license_plate }}</p>
-                <p><strong>Data da viagem:</strong>  {{ $trip->date_start_formatted }}</p>
-                <p><strong>Status:</strong>  {{ $trip->status_text }}</p>
-                <a class="more_details" href="{{ route('trips.show', $trip) }}" title="Ver Detalhes">Mais detalhes</a>
-                <hr>
-            </div>
-        @endforeach
-    @endif
+    @endforelse
 @endsection
