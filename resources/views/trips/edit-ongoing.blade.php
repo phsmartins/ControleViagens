@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Editar Viagem em Andamento</h2>
+    <h2 class="content_title">Editar Viagem em Andamento</h2>
 
     <form action="{{ route('trips.update-ongoing', $trip->id) }}" method="POST">
         @csrf
@@ -9,7 +9,7 @@
 
         <div class="input_box">
             @error('vehicle_id')
-                <p>{{ $message }}</p>
+                <p class="msg_error">{{ $message }}</p>
             @enderror
             <label>Veículo</label>
             <select name="vehicle_id">
@@ -23,7 +23,7 @@
 
         <div class="input_box">
             @error('drivers')
-                <p>{{ $message }}</p>
+                <p class="msg_error">{{ $message }}</p>
             @enderror
             <label>Motoristas</label>
             <select name="drivers[]" multiple>
@@ -37,7 +37,7 @@
 
         <div class="input_box">
             @error('km_start')
-                <p>{{ $message }}</p>
+                <p class="msg_error">{{ $message }}</p>
             @enderror
             <label>Quilometragem Inicial</label>
             <input type="number" name="km_start" value="{{ old('km_start', $trip->km_start) }}">
@@ -45,13 +45,14 @@
 
         <div class="input_box">
             @error('date_start')
-                <p>{{ $message }}</p>
+                <p class="msg_error">{{ $message }}</p>
             @enderror
             <label>Data de Início</label>
             <input type="datetime-local" name="date_start" value="{{ old('date_start', $trip->date_start) }}">
         </div>
 
-        <button type="submit">Atualizar</button>
-        <a href="{{ route('trips.index') }}">Cancelar</a>
+        <div class="btn_box">
+            <button class="btn_submit" type="submit">Atualizar</button>
+        </div>
     </form>
 @endsection

@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1><i class="fa-solid fa-pen-to-square"></i> Editar Veículo</h1>
+    <h1 class="content_title"><i class="fa-solid fa-pen-to-square"></i> Editar Veículo</h1>
+
     <form action="{{ route('vehicles.update', $vehicle->id) }}" method="POST">
         @csrf
         @method('PUT')
 
         @error('model')
-            <p>{{ $message }}</p>
+            <p class="msg_error">{{ $message }}</p>
         @enderror
         <div class="input_box">
             <label>Modelo:</label>
@@ -15,7 +16,7 @@
         </div>
 
         @error('year')
-            <p>{{ $message }}</p>
+            <p class="msg_error">{{ $message }}</p>
         @enderror
         <div class="input_box">
             <label>Ano:</label>
@@ -23,7 +24,7 @@
         </div>
 
         @error('acquisition_date')
-            <p>{{ $message }}</p>
+            <p class="msg_error">{{ $message }}</p>
         @enderror
         <div class="input_box">
             <label>Data de aquisição:</label>
@@ -31,7 +32,7 @@
         </div>
 
         @error('km_at_acquisition')
-            <p>{{ $message }}</p>
+            <p class="msg_error">{{ $message }}</p>
         @enderror
         <div class="input_box">
             <label>KM na aquisição:</label>
@@ -39,7 +40,7 @@
         </div>
 
         @error('renavam')
-            <p>{{ $message }}</p>
+            <p class="msg_error">{{ $message }}</p>
         @enderror
         <div class="input_box">
             <label>Renavam:</label>
@@ -47,13 +48,15 @@
         </div>
 
         @error('license_plate')
-            <p>{{ $message }}</p>
+            <p class="msg_error">{{ $message }}</p>
         @enderror
         <div class="input_box">
             <label>Placa:</label>
             <input type="text" name="license_plate" value="{{ $vehicle->license_plate }}">
         </div>
 
-        <button type="submit">Atualizar</button>
+        <div class="btn_box">
+            <button class="btn_submit" type="submit">Atualizar</button>
+        </div>
     </form>
 @endsection

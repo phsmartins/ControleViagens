@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Iniciar viagem</h1>
+    <h1 class="content_title">Iniciar viagem</h1>
 
     <form action="{{ route('trips.store') }}" method="POST">
         @csrf
 
         <div class="input_box">
             @error('vehicle_id')
-                <p>{{ $message }}</p>
+                <p class="msg_error">{{ $message }}</p>
             @enderror
             <label>Veículo:</label>
             <select name="vehicle_id">
@@ -20,7 +20,7 @@
 
         <div class="input_box">
             @error('drivers')
-                <p>{{ $message }}</p>
+                <p class="msg_error">{{ $message }}</p>
             @enderror
             <label>Motoristas:</label>
             <select name="drivers[]" multiple>
@@ -32,20 +32,22 @@
 
         <div class="input_box">
             @error('date_start')
-                <p>{{ $message }}</p>
+                <p class="msg_error">{{ $message }}</p>
             @enderror
-            <label>Data da viagem:</label>
+            <label>Data e hora da viagem:</label>
             <input type="datetime-local" name="date_start">
         </div>
 
         <div class="input_box">
             @error('km_start')
-                <p>{{ $message }}</p>
+                <p class="msg_error">{{ $message }}</p>
             @enderror
             <label>Km inicial:</label>
             <input type="number" name="km_start">
         </div>
 
-        <button type="submit">Iniciar viagem</button>
+        <div class="btn_box">
+            <button class="btn_submit" type="submit">Iniciar viagem</button>
+        </div>
     </form>
 @endsection
