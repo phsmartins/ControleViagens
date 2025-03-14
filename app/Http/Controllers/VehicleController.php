@@ -29,7 +29,7 @@ class VehicleController extends Controller
                 'acquisition_date' => 'required|date|before_or_equal:today',
                 'km_at_acquisition' => 'required|integer|min:0',
                 'renavam' => 'required|integer|unique:vehicles,renavam|digits:11',
-                'license_plate' => 'required|string|unique:vehicles,license_plate|digits:7',
+                'license_plate' => 'required|string|unique:vehicles,license_plate',
             ],
             [
                 'model.required' => 'O modelo do veículo é obrigatório',
@@ -53,7 +53,6 @@ class VehicleController extends Controller
 
                 'license_plate.required' => 'A placa do veículo é obrigatório',
                 'license_plate.unique' => 'Esta placa já está cadastrado em outro veículo',
-                'license_plate.digits' => 'Digite uma placa válida',
             ]
         );
 
@@ -111,7 +110,19 @@ class VehicleController extends Controller
 
     public function show(int $id): View
     {
-        $vehicle = Vehicle::findOrFail($id);
+        $vehicle = Vehicle::with([
+            'trips' => function ($query) {
+                $query->orderByRaw("
+                    CASE
+                        WHEN status = 'ongoing' THEN 1
+                        WHEN status = 'completed' THEN 2
+                        ELSE 3
+                    END
+                ")->orderBy('date_start', 'desc');
+            },
+            'trips.drivers'
+        ])->findOrFail($id);
+
         return view('vehicles.show', compact('vehicle'));
     }
 
