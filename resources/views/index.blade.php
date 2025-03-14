@@ -21,9 +21,8 @@
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </form>
-            @if($trip->status === 'ongoing')
-                <a href="{{ route('trips.finish', $trip) }}">Finalizar</a>
-            @endif
+            <a href="{{ route('trips.finish', $trip) }}">Finalizar</a>
+            <hr>
         @endforeach
     @endif
 @endsection
